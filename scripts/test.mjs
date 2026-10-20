@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {readFileSync,readdirSync} from 'node:fs';
+import {readFileSync,readdirSync,statSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {test} from 'node:test';
 import {runInNewContext} from 'node:vm';
@@ -62,4 +62,14 @@ test('published tree contains no game archives, images or supplied prepared ZIP'
   assert.equal(files.some(x=>/\.(stk|itk|img|7z|bin|cue|ogg|flac|lic|s\d\d)$/i.test(x)),false);
   assert.equal(files.some(x=>/CD_ready\.zip/i.test(x)),false);
   assert.equal(files.some(x=>/\.zip$/i.test(x)&&!x.startsWith('data/')),false);
+});
+test('every catalogued runtime file and directory exists with the declared size',()=>{
+  const check=directory=>{
+    const index=JSON.parse(read(`docs/data/${directory}index.json`));
+    for(const [name,entry] of Object.entries(index)){
+      if(typeof entry==='number')assert.equal(statSync(new URL(`docs/data/${directory}${name}`,root)).size,entry,`${directory}${name}`);
+      else check(`${directory}${name}/`);
+    }
+  };
+  check('');
 });

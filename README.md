@@ -22,4 +22,4 @@ Private preparation used the original disc's TRACK 02 INDEX 01 boundary at 01:29
 
 ## Licenses
 
-Frontend: GPL-3.0-or-later; see COPYING. ScummVM source revision, build recipe and complete source patch accompany the bundled runtime in BUILD.txt and SOURCE.patch. fflate is MIT-licensed; license included next to the vendored module. `docs/data/` contains ScummVM support assets, not commercial game data. Independent fan project; game trademarks/assets belong to their respective owners.
+Frontend: GPL-3.0-or-later; see COPYING. ScummVM source revision, build recipe and complete source patch accompany the bundled runtime in BUILD.txt and SOURCE.patch. fflate is MIT-licensed; license included next to the vendored module. `docs/data/` contains ScummVM support assets, not commercial game data. The four icon metadata XML files come from gui/themes/gui-icons.dat at the same ScummVM source revision; no game-cover images are included. Independent fan project; game trademarks/assets belong to their respective owners.

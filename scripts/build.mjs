@@ -1,4 +1,4 @@
-import {readFile,writeFile,copyFile,mkdir} from 'node:fs/promises';
+import {readFile,writeFile,copyFile,mkdir,stat} from 'node:fs/promises';
 import path from 'node:path';
 import {createRequire} from 'node:module';
 import ts from 'typescript';
@@ -20,4 +20,14 @@ await writeFile(indexPath,JSON.stringify(index,null,2)+'\n');
 // The runtime enumerates this directory even when its parent catalog is empty.
 await mkdir(path.join(root,'docs/data/games'),{recursive:true});
 await writeFile(path.join(root,'docs/data/games/index.json'),'{}\n');
+// Native dialogs can lazily request icon metadata even in a dedicated player.
+// Ship the matching ScummVM XML metadata, with an empty image directory.
+const iconIndex={icons:{}};
+for(const name of ['companies.xml','engines.xml','games.xml','series.xml'])iconIndex[name]=(await stat(path.join(root,'docs/data/gui-icons',name))).size;
+await writeFile(path.join(root,'docs/data/gui-icons/index.json'),JSON.stringify(iconIndex)+'\n');
+await mkdir(path.join(root,'docs/data/gui-icons/icons'),{recursive:true});
+await writeFile(path.join(root,'docs/data/gui-icons/icons/index.json'),'{}\n');
+// Dedicated Gob engine: do not advertise unrelated, unshipped plugins.
+await writeFile(path.join(root,'docs/data/plugins/index.json'),JSON.stringify({'libgob.so':(await stat(path.join(root,'docs/data/plugins/libgob.so'))).size})+'\n');
+await writeFile(path.join(root,'docs/data/shaders/index.json'),'{}\n');
 console.log('Static Gobliins 2 CD test built in docs/.');
