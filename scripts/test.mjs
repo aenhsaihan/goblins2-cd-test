@@ -39,7 +39,7 @@ test('bundled runtime and timer fix are always selected under the project subpat
   const p=load();assert.match(p.document.script.src,/^\/goblins2-cd-test\/engine\/7eeac96190be191e\/scummvm.js$/);assert.match(p.context.rewritten,/service_timers=1/);assert.equal(p.context.midiOutputMap.size,0);
 });
 test('virtual data requests use the project subpath, not the account root',async()=>{
-  const p=load();await p.window.fetch('/data/index.json');assert.equal(p.fetches[0].input,'https://example.github.io/goblins2-cd-test/data/index.json');
+  const p=load();await p.window.fetch('/data/index.json');assert.equal(p.fetches[0].input,'https://example.github.io/goblins2-cd-test/data/index.json?pack=gob2-cd-support-2');
 });
 test('game files and IDBFS HOME are isolated from both working games',()=>{
   const player=read('docs/player.html'),library=read('docs/game-library.js'),shell=read('docs/shell.js');

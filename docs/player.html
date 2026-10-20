@@ -283,6 +283,7 @@ onscreen_control=false
         // Runtime support is bundled on this test site. Game files come only
         // from the browser-local library; no production or demo mirror is used.
         const nativeFetch = window.fetch.bind(window);
+        const supportPackVersion = 'gob2-cd-support-2';
         window.fetch = (input, init) => {
           const inputUrl = typeof input === 'string'
             ? input
@@ -298,6 +299,9 @@ onscreen_control=false
           const url = new URL(inputUrl, location.href);
           if (url.origin === location.origin && url.pathname.startsWith('/data/')) {
             url.pathname = siteBase.pathname + url.pathname.slice(1);
+            // Keep a cached catalog and its declared file lengths on the same
+            // support-pack version, including after metadata-only updates.
+            url.searchParams.set('pack', supportPackVersion);
             return fetchRewritten(url);
           }
           if (url.origin === location.origin && url.pathname.startsWith(runtimeBase)) {
@@ -314,6 +318,7 @@ onscreen_control=false
           const requestUrl = new URL(url, location.href);
           if (requestUrl.origin === location.origin && requestUrl.pathname.startsWith('/data/')) {
             requestUrl.pathname = siteBase.pathname + requestUrl.pathname.slice(1);
+            requestUrl.searchParams.set('pack', supportPackVersion);
             url = requestUrl.href;
           }
           this.__goblins2Url = String(url);
