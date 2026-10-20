@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0e0b09">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Gobliins 2 CD">
+  <meta name="description" content="A separate, touch-friendly Gobliins 2 CD player. Import your own game files locally; nothing is uploaded.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <title>Gobliins 2 — CD test</title>
+</head>
+<body>
+<main>
+  <p class="eyebrow">THE PRINCE BUFFOON · ISOLATED CD TEST</p>
+  <h1>The same adventure.<br><span>The CD soundtrack.</span></h1>
+  <p class="intro">Gobliins 2, the DOS CD edition—on your phone.</p>
+  <p class="notice">A separate CD test, with its own local files and saves. The working Gobliins 2 floppy player and Goblins 3 are unchanged.</p>
+  <p><a href="https://aenhsaihan.github.io/goblins2-web-test/">← Play the floppy edition</a></p>
+  <section aria-labelledby="import-heading">
+    <h2 id="import-heading">1. Bring your CD game</h2>
+    <p>This test supports the English US CD v1.000 release. Import <strong>Gobliins_2_CD_ready.zip</strong>, prepared from your supplied disc bundle, or its extracted folder. It includes the game data and the complete CD audio in browser-compatible Ogg Vorbis format. The original 444 MB ZIP, raw disc image and FLAC file cannot be imported directly here.</p>
+    <div class="actions">
+      <label class="import-button secondary">Import game ZIP<input id="zip" type="file" accept=".zip,application/zip"></label>
+      <label class="import-button secondary">Import folder<input id="folder" type="file" webkitdirectory multiple></label>
+    </div>
+    <progress id="progress" max="100" value="0" hidden aria-label="Import progress"></progress>
+    <p id="library" role="status">Checking local game storage…</p>
+    <p id="status" aria-live="polite"></p>
+    <p id="error" role="alert"></p>
+    <div class="actions">
+      <button id="play" disabled>Play Gobliins 2 CD</button>
+      <button id="continue" class="secondary" hidden>Return to game</button>
+    </div>
+  </section>
+  <section aria-labelledby="controls-heading">
+    <h2 id="controls-heading">2. Make yourself at home</h2>
+    <ul>
+      <li>On iPhone, use Safari → Share → Add to Home Screen, then rotate to landscape.</li>
+      <li>Drag to move the pointer; tap to click. Two-finger tap is the right mouse button. A mouse and keyboard work too.</li>
+      <li>Move the pointer to the top edge for the game's menu; the floppy-disk icon opens Save/Load. Use Keyboard for a save name: type the name and Return, then tap the green check. CD saves are separate from the floppy edition and Goblins 3.</li>
+      <li>Tap Sound if audio needs waking up. The small Menu button returns here without restarting the game.</li>
+    </ul>
+    <p>Files are never sent to a server. Browser storage can still be cleared by the device or its settings; don't rely on private browsing to keep saves.</p>
+  </section>
+  <footer>Independent fan-made browser player, powered by ScummVM. No commercial game data is distributed. <a href="https://github.com/aenhsaihan/goblins2-cd-test">Source &amp; licenses</a>.</footer>
+</main>
+<div id="game" hidden>
+  <iframe id="player" title="Gobliins 2 player" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  <button id="menu" type="button">Menu</button>
+</div>
+<script type="module" src="./shell.js"></script>
+</body>
+</html>
